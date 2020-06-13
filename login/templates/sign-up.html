@@ -1,0 +1,54 @@
+﻿{% extends 'base.html' %}
+{% block body %}
+{% load static %}
+
+<div class="inner-banner">
+	<div class="opacity">
+		<div class="container">
+			<h2>Sign Up</h2>
+			<ul>
+				<li><a href="index.html" class="tran3s">Home</a></li>
+				<li>/</li>
+				<li><a href="#">pages</a></li>
+				<li>/</li>
+				<li>Registration</li>
+			</ul>
+		</div> 
+	</div> 
+</div>
+
+
+<div class="signUpModal theme-modal-box">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<h3>Login with Social Networks</h3>
+				<ul class="clearfix">
+					<li class="float-left"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i> facebook</a>
+					</li>
+					<li class="float-left"><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i> Google</a>
+					</li>
+					<li class="float-left"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i> Twitter</a></li>
+					<li class="float-left"><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i> Linkedin</a>
+					</li>
+				</ul>
+				<form action="/signup" method="POST">
+					{% csrf_token %}
+					<h3>Sign Up</h3>
+					<h6 style="color: red;">{{error}}</h6>
+					<div class="wrapper">
+						<input type="email" id='email' name='email' placeholder="Email">
+						<input type="text" id='fname' name='fname' placeholder="First Name">
+						<input type="text" id='mname' name='mname' placeholder="Middle Name">
+						<input type="text" id='lname' name='lname' placeholder="Last Name">
+						<input type="password" id='password' name="password" placeholder="Password">
+						<input type="password" id='cpassword' name="cpassword" placeholder="Repeat Password">
+						<button class="p-bg-color hvr-trim">Sing up</button>
+					</div>
+				</form>
+			</div>
+		</div> 
+	</div>
+</div>
+
+{% endblock body %}

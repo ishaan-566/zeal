@@ -1,0 +1,68 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<div class="inner-banner">
+	<div class="opacity">
+		<div class="container">
+			<h2>Admin Menu</h2>
+			<ul>
+				<li><a href="index.html" class="tran3s">Home</a></li>
+				<li>/</li>
+				<li>Admin</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+
+<div class="our-instructor">
+	<div class="container">
+
+		<div class="row">
+			<div class="clearfix">
+				<div class="col-12">
+					{% if error %}
+					<h4 style="color: red;">{{error}}</h4>
+					{% endif %}
+					{% if msg %}
+					<h4 style="color: green;">{{msg}}</h4>
+					{% endif %}
+				</div>
+				<div class="col-md-3 col-sm-4 col-xs-6">
+					<div class="single-member">
+						<div class="image">
+							<img src="static\images\team\4.jpg" alt="">
+						</div>
+						<h6><a href="{% url 'adminsite:teacher' %}" class="tran3s">Add Instructor</a></h6>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-4 col-xs-6">
+					<div class="single-member">
+						<div class="image">
+							<img src="static\images\team\4.jpg" alt="">
+						</div>
+						<h6><a href="{% url 'adminsite:editteachers' %}" class="tran3s">Edit Instructor</a></h6>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-4 col-xs-6">
+					<div class="single-member">
+						<div class="image">
+							<img src="static\images\team\4.jpg" alt="">
+						</div>
+						<h6><a href="{% url 'adminsite:features' %}" class="tran3s">Features</a></h6>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-4 col-xs-6">
+					<div class="single-member">
+						<div class="image">
+							<img src="static\images\team\4.jpg" alt="">
+						</div>
+						<h6><a href="{% url 'adminsite:mailletter' %}" class="tran3s">Mail Letter</a></h6>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock body %}

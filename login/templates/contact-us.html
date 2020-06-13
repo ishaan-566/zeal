@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+
+<div class="inner-banner">
+	<div class="opacity">
+		<div class="container">
+			<h2>Contact Us</h2>
+			<ul>
+				<li><a href="/" class="tran3s">Home</a></li>
+				<li>/</li>
+				<li>Conatct</li>
+			</ul>
+		</div> <!-- /.container -->
+	</div> <!-- /.opacity -->
+</div> <!-- /.inner-banner -->
+
+
+
+<!-- 
+			=============================================
+				Contact Form
+			============================================== 
+			-->
+<div class="container contact-us-page">
+	<div class="row">
+		<div class="col-md-6 col-sm-12 col-xs-12 wow fadeInLeft">
+			<div class="contact-us-form">
+				<h2>Send a Message</h2>
+
+				<form action="" method="POST">
+					{% csrf_token %}
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="single-input">
+								<input required type="text" placeholder="You Name*" name="name">
+							</div> <!-- /.single-input -->
+						</div> <!-- /.col- -->
+						<div class="col-sm-6 col-xs-12">
+							<div class="single-input">
+								<input required type="email" placeholder="Enter Email here*" name="email">
+							</div> <!-- /.single-input -->
+						</div> <!-- /.col- -->
+						<div class="col-sm-6 col-xs-12">
+							<div class="single-input">
+								<input required type="text" placeholder="Phone Number" name="phone">
+							</div> <!-- /.single-input -->
+						</div> <!-- /.col- -->
+						<div class="col-xs-12">
+							<div class="single-input">
+								<textarea required placeholder="Your Message" name="message"></textarea>
+							</div> <!-- /.single-input -->
+						</div> <!-- /.col- -->
+					</div> <!-- /.row -->
+					<input type="submit" value="Send Message" class="tran3s p-bg-color">
+				</form>
+
+			</div> <!-- /.contact-us-form -->
+		</div> <!-- /.col- -->
+
+		<div class="col-md-6 col-sm-12 col-xs-12 wow fadeInRight">
+			<div class="contactUs-address">
+				<h2>Contact Information</h2>
+				<div class="single-address clearfix">
+					<div class="icon float-left"><i class="flaticon-placeholder"></i></div>
+					<div class="text float-left">
+						<h6>Address</h6>
+						<span></span>
+					</div>
+				</div> <!-- End of .single-address -->
+				<div class="single-address clearfix">
+					<div class="icon float-left"><i class="flaticon-envelope"></i></div>
+					<div class="text float-left">
+						<h6>Email</h6>
+						<span></span>
+					</div>
+				</div> <!-- End of .single-address -->
+				<div class="single-address clearfix">
+					<div class="icon float-left"><i class="flaticon-phone-call"></i></div>
+					<div class="text float-left">
+						<h6>Phone</h6>
+						<span></span>
+					</div>
+				</div> <!-- End of .single-address -->
+			</div> <!-- /.our-address -->
+		</div>
+	</div> <!-- /.row -->
+</div> <!-- /.container -->
+
+<br>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 col-xs-12 col-sm-12">
+			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3495.7887954798884!2d77.5502985145907!3d28.81536718253416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cf549e7aac22d%3A0xc8dd6b82d8fcc310!2sZeal%20Educates!5e0!3m2!1sen!2sin!4v1591707772789!5m2!1sen!2sin"  frameborder="0" style="border:0;width:100%;height:450px;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+		</div>
+		<div class="col-md-6 col-xs-12 col-sm-12">
+			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3499.625716758838!2d77.44351671458806!3d28.70084078773793!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cf10d15361e5d%3A0x929887e60223fb43!2sZeal%20Institute!5e0!3m2!1sen!2sin!4v1591707803543!5m2!1sen!2sin" frameborder="0" style="border:0;width:100%;height:450px;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+		</div>
+	</div>
+</div>
+<br>
+{% endblock body %}

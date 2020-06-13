@@ -1,0 +1,60 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+<div class="inner-banner">
+	<div class="opacity">
+		<div class="container">
+			<h2>SubCategory</h2>
+			<ul>
+				<li><a href="/" class="tran3s">Home</a></li>
+				<li>/</li>
+				<li><a href="/category" class="tran3s">Category</a></li>
+				<li>/</li>
+				<li>Subcategory</li>
+			</ul>
+		</div> <!-- /.container -->
+	</div> <!-- /.opacity -->
+</div> <!-- /.inner-banner -->
+
+<div class="shop-page">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-9 col-md-8 col-xs-12 all-product-wrapper float-right">
+				<div class="row">
+					{% for s in subcategory %}
+					<div class="col-sm-4 col-xs-6">
+						<div class="single-item">
+							<img src="{{ s.image.url }}" alt="">
+							<h5><a href="" class="tran3s">{{ s.name }}</a></h5>
+							<a href="/article/display-sub{{ s.id }}" class="tran3s cart">Click To View</a>
+						</div> <!-- /.single-item -->
+					</div>
+					{% endfor %}
+
+				</div> <!-- /.row -->
+				<ul class="theme-pagination clearfix">
+					{% for p,c in pages.items %}
+						<li><a {{c}}>{{p}}</a></li>
+					{% endfor %}
+					<li></li>
+				</ul> <!-- /.theme-pagination -->
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 shop-sidebar course-sidebar">
+				<div class="shop-sidebar-list">
+					<h4>Categories</h4>
+					<ul>
+						{% for c in categories %}
+						<li><a href="/category-{{ c.id }}" class="tran3s">{{ c.name }}</a></li>
+						{% endfor %}
+					</ul>
+				</div> <!-- /.shop-sidebar-list -->
+			</div> <!-- /.shop-sidebar -->
+		</div> <!-- /.row -->
+	</div> <!-- /.container -->
+</div> <!-- /.shop-page -->
+
+
+
+{% endblock body %}

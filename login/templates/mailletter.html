@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<div class="inner-banner">
+	<div class="opacity">
+		<div class="container">
+			<h2>Mail Letter</h2>
+			<ul>
+				<li><a href="{% url 'login:home' %}" class="tran3s">Home</a></li>
+				<li>/</li>
+				<li><a href="{% url 'login:admin' %}" class="tran3s">Admin</a></li>
+				<li>/</li>
+				<li>Mail Letter</li>
+			</ul>
+		</div> <!-- /.container -->
+	</div> <!-- /.opacity -->
+</div>
+<div class="container contact-us-page">
+	<div class="contact-us-form">
+		<h2>Send a Message</h2>
+
+		<form action="" method="POST">
+			{% csrf_token %}
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="single-input">
+						<input required type="text" placeholder="Subject*" name="subject">
+					</div> <!-- /.single-input -->
+				</div>
+		
+				<div class="col-xs-12">
+					<div class="single-input">
+						<textarea required placeholder="Your Message" name="body"></textarea>
+					</div> <!-- /.single-input -->
+				</div> <!-- /.col- -->
+
+				<div class="col-xs-12">
+					<div class="single-input">
+						<input type="checkbox" name="name" id=""> With Name
+					</div> <!-- /.single-input -->
+				</div>
+			</div> <!-- /.row -->
+			<input type="submit" value="Send Message" class="tran3s p-bg-color">
+		</form>
+
+	</div>
+</div> <!-- /.container -->
+<br>
+
+{% endblock body %}

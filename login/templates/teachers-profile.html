@@ -1,0 +1,269 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+<style>
+	.form-group>input {
+		display: block;
+		width: 100%;
+		height: 34px;
+		padding: 6px 12px;
+		font-size: 14px;
+		line-height: 1.42857143;
+		color: #555;
+		background-color: #fff;
+		background-image: none;
+		border: 1px solid #ccc;
+		border-radius: 4px;
+		-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+		box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+		-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+		-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+		transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	}
+</style>
+{% endblock style %}
+
+{% block script %}
+<script>
+	function impreview(i) {
+		var preview = document.getElementById('image');
+		var file = document.getElementById('id_pic').files[0];
+		var reader = new FileReader();
+
+		reader.onloadend = function () {
+			preview.src = reader.result;
+		}
+
+		if (file) {
+			reader.readAsDataURL(file);
+		} else {
+			preview.src = i;
+		}
+	}
+</script>
+{% endblock script %}
+
+{% block body %}
+<div class="inner-banner">
+	<div class="opacity">
+		<div class="container">
+			<h2>Instructor Profile</h2>
+			<ul>
+				<li><a href="index.html" class="tran3s">Home</a></li>
+				<li>/</li>
+				<li>Instructor</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="our-instructor-profile">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 col-sm-6 col-xs-12">
+				{% if  editteacher%}
+				<img id='image' src="{{ teacher.pic.url }}" alt="">
+				<br>
+				<button class="btn p-bg-color hvr-trim" onclick="impreview('{{ teacher.pic.url }}')">Click To Preview Image</button>
+				{% elif  addteacher%}
+				<img id='image' src="\static\images\team\12.jpg" alt="">
+				<br>
+				<button class="btn p-bg-color hvr-trim" onclick="impreview()">Click To Preview Image</button>
+				{% else %}
+				<img id='image' src="{% if teacher.pic %}
+				{{ teacher.pic.url }}
+				{% else %}
+				\static\images\team\12.jpg
+				{% endif %}" alt="">
+				{% endif %}
+				
+			</div>
+			{% if editteacher %}
+			<div class="col-md-8 col-xs-12">
+				<div class="signUpModal theme-modal-box">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							{% if error %}
+							<h6 style="color: red;">{{error}}</h6>
+							{% endif %}
+							<div class="modal-body" style="padding: 0;">
+								<form action="" method="POST" enctype="multipart/form-data">
+									{% csrf_token %}
+									<h3>Instructor</h3>
+
+									<h6 id='err' style="color: red;"></h6>
+									<div class="wrapper">
+										<div class="form-group">
+											{{form}}
+										</div>
+										<input type="email" id='email' name='email' value="{{ teacher.userd.user.email }}" placeholder="Email" readonly>
+										<input type="password" id='password' name="password" placeholder="Password"
+											required onchange="checkPassword()">
+										<input type="password" id='cpassword' name="cpassword"
+											placeholder="Repeat Password" required onchange="checkPassword()">
+										<script>
+											function checkPassword() {
+												pass = document.getElementById('password').value;
+												cpass = document.getElementById('cpassword').value;
+												if (pass != cpass) {
+													document.getElementById('save').disabled = true;
+													document.getElementById('save').style.backgroundColor = 'grey';
+													document.getElementById('err').innerHTML = 'Password Didnt Match'
+												}
+												else {
+													document.getElementById('save').disabled = false;
+													document.getElementById('save').style.backgroundColor = '#FF3A46';
+													document.getElementById('err').innerHTML = ''
+												}
+											}
+										</script>
+										<input type="text" id='fname' name='fname' value="{{ teacher.userd.fname }}" placeholder="First Name" required>
+										<input type="text" id='mname' name='mname' value="{{ teacher.userd.mname }}" placeholder="Middle Name">
+										<input type="text" id='lname' name='lname' value="{{ teacher.userd.lname }}" placeholder="Last Name">
+										<input type="text" id='designation' value="{{ teacher.designation }}" name='designation' placeholder="Designation"
+											required>
+										<input type="text" id='facebook' value="{{ teacher.facebook }}" name='facebook' placeholder="Facebook">
+										<input type="text" id='twitter' value="{{ teacher.twitter }}" name='twitter' placeholder="Twitter">
+										<input type="text" id='linkedin' value="{{ teacher.linkedin }}" name='linkedin' placeholder="Linkedin">
+										<input type="text" id='instagram' value="{{ teacher.instagram }}" name='instagram' placeholder="Instagram">
+										<input type="text" id='website' value="{{ teacher.website }}" name='website' placeholder="Website">
+										<textarea name="about" id="about" class="form-control" rows="10"
+											required>{{ teacher.about }}</textarea>
+										<br>
+										<input type="checkbox" name="admin" id="admin" value="True"
+											style="width: auto; height: auto;" {% if teacher.userd.user.admin %}
+											checked="checked"
+											{% endif %}>
+										<label for="admin">Admin</label>
+										<button class="p-bg-color hvr-trim" id="save">Save</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			{% elif addteacher %}
+			<div class="col-md-8 col-xs-12">
+				<div class="signUpModal theme-modal-box">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							{% if error %}
+							<h6 style="color: red;">{{error}}</h6>
+							{% endif %}
+							<div class="modal-body" style="padding: 0;">
+								<form action="" method="POST" enctype="multipart/form-data">
+									{% csrf_token %}
+									<h3>Instructor</h3>
+
+									<h6 id='err' style="color: red;"></h6>
+									<div class="wrapper">
+										<div class="form-group">
+											{{form}}
+										</div>
+										<input type="email" id='email' name='email' placeholder="Email" required>
+										<input type="password" id='password' name="password" placeholder="Password"
+											required onchange="checkPassword()">
+										<input type="password" id='cpassword' name="cpassword"
+											placeholder="Repeat Password" required onchange="checkPassword()">
+										<script>
+											function checkPassword() {
+												pass = document.getElementById('password').value;
+												cpass = document.getElementById('cpassword').value;
+												if (pass != cpass) {
+													document.getElementById('save').disabled = true;
+													document.getElementById('save').style.backgroundColor = 'grey';
+													document.getElementById('err').innerHTML = 'Password Didnt Match'
+												}
+												else {
+													document.getElementById('save').disabled = false;
+													document.getElementById('save').style.backgroundColor = '#FF3A46';
+													document.getElementById('err').innerHTML = ''
+												}
+											}
+										</script>
+										<input type="text" id='fname' name='fname' placeholder="First Name" required>
+										<input type="text" id='mname' name='mname' placeholder="Middle Name">
+										<input type="text" id='lname' name='lname' placeholder="Last Name">
+										<input type="text" id='designation' name='designation' placeholder="Designation"
+											required>
+										<input type="text" id='facebook' name='facebook' placeholder="Facebook">
+										<input type="text" id='twitter' name='twitter' placeholder="Twitter">
+										<input type="text" id='linkedin' name='linkedin' placeholder="Linkedin">
+										<input type="text" id='instagram' name='instagram' placeholder="Instagram">
+										<input type="text" id='website' name='website' placeholder="Website">
+										<textarea name="about" id="about" class="form-control" rows="10"
+											required>About</textarea>
+										<br>
+										<input type="checkbox" name="admin" id="admin" value="True"
+											style="width: auto; height: auto;">
+										<label for="admin">Admin</label>
+										<button class="p-bg-color hvr-trim" id="save">Save</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			{% else %}
+			<div class="col-md-8 col-xs-12">
+				<div class="text">
+					<div class="title">
+						<h4>{{teacher.userd.fname}}&nbsp;{{teacher.userd.mname}}&nbsp;{{teacher.userd.lname}}</h4>
+						<span>{{ teacher.designation }}</span>
+					</div>
+					<ul class="social-media">
+						{% if teacher.facebook %}
+						<li><a href="{{ teacher.facebook }}" class="tran3s"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+						{% endif %}
+						{% if teacher.twitter %}
+						<li><a href="{{ teacher.twitter }}" class="tran3s"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+						{% endif %}
+						{% if teacher.linkedin %}
+						<li><a href="{{ teacher.linkedin }}" class="tran3s"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+						{% endif %}
+						{% if teacher.instagram %}
+						<li><a href="{{ teacher.instagram }}" class="tran3s"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+						{% endif %}
+						{% if teacher.website %}
+						<li><a href="{{ teacher.website }}" class="tran3s"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+						{% endif %}
+					</ul>
+					<p>
+						{{ teacher.about }}
+					</p>
+				</div>
+			</div>
+			{% endif %}
+		</div>
+	</div>
+</div>
+{% if displaycourses %}
+<div class="teachers-course popular-course">
+	<div class="container">
+		<h3>Courses by {{teacher.userd.fname}}&nbsp;{{teacher.userd.mname}}&nbsp;{{teacher.userd.lname}}</h3>
+		<div class="row">
+			<div class="teachers-course-slider">
+				{% for course in  courses%}
+				<div class="item">
+					<div class="single-course">
+						<div class="image-box"><img src="{{ course.image.url }}" alt=""></div>
+						<div class="text">
+							<div class="image"><img src="{{ teacher.pic.url }}" alt=""></div>
+							<div class="name clearfix">
+								<h6 class="float-left">{{course.created_on}}</h6>
+							</div>
+							<h5><a href="/article/display-article{{course.id}}" class="tran3s">{{ course.title }}</a></h5>
+							
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}
+{% endblock body %}

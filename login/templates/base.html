@@ -1,0 +1,254 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- For IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- For Resposive Device -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ZEAL Educates</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="56x56" href="/static/images/fav-icon/icon.png">
+
+
+    <!-- Main style sheet -->
+    <link rel="stylesheet" type="text/css" href="\static\css\style.css">
+    <!-- responsive style sheet -->
+    <link rel="stylesheet" type="text/css" href="\static\css\responsive.css">
+    <style>
+        .second-sub-menu {
+            visibility: hidden;
+        }
+
+        #mega-menu-wrapper .nav>li.dropdown-holder .sub-menu>li:hover .second-sub-menu {
+            left: 100%;
+            visibility: visible;
+        }
+    </style>
+    {% block style %}
+    {% endblock style %}
+    {% block script %}
+    {% endblock script %}
+
+</head>
+
+<body>
+    {% if msg %}
+    <h4 style="color:green">{{msg}}</h4>
+    {% endif %}
+
+    {% if error %}
+    <h4 style="color:red">{{error}}</h4>
+    {% endif %}
+    <div class="main-page-wrapper">
+
+        <div id="loader-wrapper">
+            <div id="loader"></div>
+        </div>
+
+        <header class="theme-menu-wrapper menu-style-one">
+            <div class="container">
+                <div class="header-wrapper clearfix">
+                    <div class="logo float-left tran4s">
+                        <a href="/">
+                            <img src="\static\images\ZEAL.png" style="width: 300px;height:49px;" alt="Logo">
+                        </a>
+                    </div>
+                    <nav class="theme-main-menu float-right navbar" id="mega-menu-wrapper">
+
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#navbar-collapse-1" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                            <ul class="nav">
+                                <li><a href="/" class="tran3s">Home</a></li>
+
+                                <li><a href="/#instructors" class="tran3s">Instructors</a></li>
+                                <li><a href="/#testimony" class="tran3s">Testimony</a></li>
+                                <li class="dropdown-holder menu-list"><a href="#" class="tran3s">Categories</a>
+                                    <ul class="sub-menu">
+                                        {% for c,sub in categories.items %}
+                                        <li class="dropdown-holder"><a href="/category-{{ c.id }}">{{ c.name }}</a>
+                                            <ul class="second-sub-menu">
+                                                {% for s in sub %}
+                                                <li><a href="{{ s.get_absolute_url }}">{{ s.name }}</a></li>
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                                <li><a href="/contact-us" class="tran3s">Contact Us</a></li>
+                                <li class="login">
+                                    {% if username %}
+                                <li class="dropdown-holder menu-list">
+                                    <a href="#" class="tran3s">{{ userd.fname }}&nbsp;{{ userd.mname }}&nbsp;{{ userd.lname }}</a>
+                                    <ul class="sub-menu">
+                                        {% if request.session.admin %}
+                                        <li><a href="/site-admin" class="trans3s">Admin</a></li>
+                                        {% endif %}
+                                        {% if request.session.teacher %}
+                                        <li><a href="/teacher" class="trans3s">Teacher</a></li>
+                                        {% endif %}
+                                        <li><a href="/logout" class="tran3s">Logout</a></li>
+                                    </ul>
+                                </li>
+                                {% else %}
+                                <button class="tran3s" data-toggle="modal" data-target=".signInModal">
+                                    <i class="flaticon-lock"></i> Login
+                                </button>
+                                {% endif %}
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        {% block body %}
+
+        {% endblock body %}
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="footer-logo">
+                            <a href="/"><img src="\static\images\ZEAL.png" alt="Logo"></a>
+                            <ul>
+                                <li><a href="" class="tran3s"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="" class="tran3s"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="https://www.youtube.com/channel/UC18Q7rtkM09OngFJS_NHWlQ" target="blan"
+                                        class="tran3s"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
+                                <li><a href="" class="tran3s"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-3 footer-list">
+                        <p>“Any fool can write code that a computer can understand. Good programmers write code that
+                            humans can understand.” <br>— Martin Fowler</p>
+                    </div>
+                    <div class="col-md-2 col-sm-3 footer-list">
+                        <h6>Company</h6>
+                        <ul>
+                            <li><a href="/about-us" class="tran3s">About Us</a></li>
+                            <li><a href="/contact-us" class="tran3s">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2 col-sm-3 footer-list">
+                        <h6>Product</h6>
+                        <ul>
+                            <li><a href="#" class="tran3s">Education Pack</a></li>
+                            <li><a href="#" class="tran3s">Eucation Starter</a></li>
+                            <li><a href="/category" class="tran3s">Features &amp; Skills</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12 footer-subscribe">
+                        <h6>Subscribe Us</h6>
+                        <p>This sounded a very good reason, and Alice was quite pleased.</p>
+                        <form action="/subscribe" method="POST">
+                            {% csrf_token %}
+                            <input name="email" type="text" placeholder="Your Email">
+                            <button class="tran3s p-bg-color"><i
+                                    class="flaticon-envelope-back-view-outline"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+
+
+        <div class="modal fade signInModal theme-modal-box" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <!-- <h3>Login with Social Networks</h3>
+                        <ul class="clearfix">
+                            <li class="float-left"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i>
+                                    facebook</a></li>
+                            <li class="float-left"><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i>
+                                    Google</a></li>
+                            <li class="float-left"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i>
+                                    Twitter</a></li>
+                            <li class="float-left"><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i>
+                                    Linkedin</a></li>
+                        </ul> -->
+                        <form action="/login" method="POST">
+                            {% csrf_token %}
+                            <h3>Login with Site Account</h3>
+                            <div class="wrapper">
+                                <input type="text" placeholder="Username or Email" name="email" id="email">
+                                <input type="password" placeholder="Password" name="password" id="password">
+                                <!-- <ul class="clearfix">
+                                    <li class="float-left">
+                                        <input type="checkbox" id="remember">
+                                        <label for="remember">Remember Me</label>
+                                    </li>
+                                    <li class="float-right"><a href="#" class="s-color">Lost Your Password?</a></li>
+                                </ul> -->
+                                <button class="p-bg-color hvr-trim">Login</button>
+                            </div>
+                        </form>
+                        <div><a href="/signup" class="p-color tran3s">Not an account?? Sign Up</a></div>
+                    </div> <!-- /.modal-body -->
+                </div> <!-- /.modal-content -->
+            </div> <!-- /.modal-dialog -->
+        </div> <!-- /.signInModal -->
+
+
+
+        <!-- Scroll Top Button -->
+        <button class="scroll-top tran3s">
+            <i class="fa fa-angle-up" aria-hidden="true"></i>
+        </button>
+
+
+        <script type="text/javascript" src="\static\vendor\jquery.2.2.3.min.js"></script>
+        <!-- Bootstrap Select JS -->
+        <script type="text/javascript" src="\static\vendor\bootstrap-select\dist\js\bootstrap-select.js"></script>
+
+        <!-- Bootstrap JS -->
+        <script type="text/javascript" src="\static\vendor\bootstrap\bootstrap.min.js"></script>
+
+        <script type="text/javascript"
+            src="\static\vendor\BootstrapFormHelpers-master\dist\js\bootstrap-formhelpers.min.js"></script>
+
+        <script type='text/javascript'
+            src='\static\vendor\Camera-master\scripts\jquery.mobile.customized.min.js'></script>
+        <script type='text/javascript' src='\static\vendor\Camera-master\scripts\jquery.easing.1.3.js'></script>
+        <script type='text/javascript' src='\static\vendor\Camera-master\scripts\camera.min.js'></script>
+
+        <script type="text/javascript" src="\static\vendor\bootstrap-mega-menu\js\menu.js"></script>
+
+
+        <script type="text/javascript" src="\static\vendor\WOW-master\dist\wow.min.js"></script>
+
+        <script type="text/javascript" src="\static\vendor\owl-carousel\owl.carousel.min.js"></script>
+
+        <script type="text/javascript" src="\static\vendor\Counter\jquery.counterup.min.js"></script>
+        <script src="\static\vendor\Counter\jquery.waypoints.min.js"></script>
+
+        <script type="text/javascript" src="\static\vendor\particles.js-master\particles.min.js"></script>
+        <script type="text/javascript" src="\static\vendor\particles.js-master\demo\js\lib\stats.js"></script>
+        <script type="text/javascript" src="\static\vendor\particles.js-master\demo\js\app.js"></script>
+
+
+        <script type="text/javascript" src="\static\js\theme.js"></script>
+
+    </div>
+</body>
+
+</html>

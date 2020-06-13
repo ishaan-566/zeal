@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style %}
+<style>
+	tbody>tr:hover{
+		cursor: pointer;
+	}
+</style>
+{% endblock style %}
+{% block script %}
+<script>
+	function redirect(id) {
+		window.location.href = '/admin-site/edit-teacher/' + id
+	}
+	function myFunction() {
+		var input, filter, table, tr, td, i, txtValue;
+		input = document.getElementById("myInput");
+		filter = input.value.toUpperCase();
+		table = document.getElementById("teacherTable");
+		tr = table.getElementsByTagName("tr");
+		for (i = 0; i < tr.length; i++) {
+			td = tr[i].getElementsByTagName("td")[0];
+			if (td) {
+				txtValue = td.textContent || td.innerText;
+				if (txtValue.toUpperCase().indexOf(filter) > -1) {
+					tr[i].style.display = "";
+				} else {
+					tr[i].style.display = "none";
+				}
+			}
+		}
+	}
+
+
+	function sortTable(n) {
+		var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+		table = document.getElementById("teacherTable");
+		switching = true;
+		dir = "asc";
+		while (switching) {
+			switching = false;
+			rows = table.rows;
+			for (i = 1; i < (rows.length - 1); i++) {
+				shouldSwitch = false;
+				x = rows[i].getElementsByTagName("td")[n];
+				y = rows[i + 1].getElementsByTagName("td")[n];
+				if (dir == "asc") {
+					if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+						shouldSwitch = true;
+						break;
+					}
+				} else if (dir == "desc") {
+					if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+						shouldSwitch = true;
+						break;
+					}
+				}
+			}
+			if (shouldSwitch) {
+				rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+				switching = true;
+				switchcount++;
+			} else {
+				if (switchcount == 0 && dir == "asc") {
+					dir = "desc";
+					switching = true;
+				}
+			}
+		}
+	}
+</script>
+{% endblock script %}
+{% block body %}
+<div class="inner-banner">
+	<div class="opacity">
+		<div class="container">
+			<h2>Contact Us</h2>
+			<ul>
+				<li><a href="{% url 'login:home' %}" class="tran3s">Home</a></li>
+				<li>/</li>
+				<li>Teachers</li>
+			</ul>
+		</div> <!-- /.container -->
+	</div> <!-- /.opacity -->
+</div>
+<div class="container contact-us-page">
+	<div class="row">
+		<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+		<table id='teacherTable' class="table table-striped">
+			<thead>
+				<tr>
+					<th onclick="sortTable(0)">Firstname&nbsp;<i class="fa fa-sort"></i></th>
+					<th>Middlename</th>
+					<th>Lastname</th>
+					<th onclick="sortTable(3)">Email&nbsp;<i class="fa fa-sort"></i></th>
+					<th onclick="sortTable(4)">Designation&nbsp;<i class="fa fa-sort"></i></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for t in teachers %}
+				<tr onclick="redirect('{{t.id}}')">
+					<td>{{ t.userd.fname }}</td>
+					<td>{{ t.userd.mname }}</td>
+					<td>{{ t.userd.lname }}</td>
+					<td>{{ t.userd.user.email }}</td>
+					<td>{{ t.designation }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div> <!-- /.row -->
+</div> <!-- /.container -->
+<br>
+
+{% endblock body %}

@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<div class="inner-banner">
+	<div class="opacity">
+		<div class="container">
+			<h2>Teacher Option</h2>
+			<ul>
+				<li><a href="{% url 'login:home' %}" class="tran3s">Home</a></li>
+				<li>/</li>
+				<li>Teacher</li>
+			</ul>
+		</div> <!-- /.container -->
+	</div> <!-- /.opacity -->
+</div>
+<div class="popular-faq">
+	<div class="container">
+		<div class="theme-title text-center">
+			<h2>Select from Below To proceed</h2>
+			<!-- <p>If you have any concerns please read this collection of frequently asked questions before contacting us.
+				If <br> you are still unclear about something feel free to contact.</p> -->
+		</div>
+		<br> <!-- /.theme-title -->
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+				{% if addcategory %}
+				<div class="container-fluid">
+					<div class="signUpModal theme-modal-box">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-body" style="padding: 0;">
+									<form action="" method="POST" enctype="multipart/form-data">
+										{% csrf_token %}
+										<h3>Category</h3>
+
+										<h6 id='err' style="color: red;"></h6>
+										<div class="wrapper">
+											<div class="form-group">
+												{{form}}
+											</div>
+											<input type="text" id='catname'
+												name='{% if addsubcategory %}sub{% endif %}catname'
+												placeholder="{% if addsubcategory %}Sub &nbsp;{% endif %}Category Name"
+												required>
+
+											{% if addsubcategory %}
+											<label for="category">Category&nbsp;&nbsp;</label>
+											<select name="category" id="category" class="form-control">
+												{% for c in category %}
+												<option value="{{c.id}}">{{ c.name }}</option>
+												{% endfor %}
+											</select>
+											{% endif %}
+											<br><br>
+											<button class="p-bg-color hvr-trim" id="save">Save</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{% else %}
+				<div class="faq-panel">
+					<div class="panel-group theme-accordion" id="accordion">
+						{% if article %}
+						{% for c, sa in articles.items %}
+						<div class="panel">
+							<div class="panel-heading">
+								<h6 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#{{c.name}}">
+										{{c.name}}</a>
+								</h6>
+							</div>
+							<div id="{{c.name}}" class="panel-collapse collapse">
+								<div class="panel-body">
+									<p>
+									{% for s,a in sa.items %}
+									<div class="panel">
+										<div class="panel-heading">
+											<h6 class="panel-title">
+												<a data-toggle="collapse" data-parent="#accordion" href="#{{s.name}}">
+													{{s.name}}</a>
+											</h6>
+										</div>
+										<div id="{{s.name}}" class="panel-collapse collapse in">
+											<div class="panel-body">
+												<p>
+												<ul>
+													{% for ar in a %}
+													<li><a href="{{ ar.editarticle }}">{{ar.title}}</a></li>
+													{% endfor %}
+												</ul>
+												</p>
+											</div>
+										</div>
+									</div>
+									{% endfor %}
+									</p>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+						{% else %}
+						{% for c,s in categories.items %}
+						<div class="panel">
+							<div class="panel-heading">
+								<h6 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#{{c.name}}">
+										{{c.name}}</a>
+								</h6>
+							</div>
+							<div id="{{c.name}}" class="panel-collapse collapse">
+								<div class="panel-body">
+									<p>
+									<ul>
+										{% for sc in s %}
+										<li><a href="{{ sc.newarticle }}">{{sc.name}}</a></li>
+										{% endfor %}
+									</ul>
+									</p>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+						{% endif %}
+					</div> <!-- end #accordion -->
+				</div>
+				{% endif %}
+			</div> <!-- /.col- -->
+		</div> <!-- /.row -->
+	</div>
+</div>
+
+{% endblock body %}

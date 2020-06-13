@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+<div class="inner-banner">
+	<div class="opacity">
+		<div class="container">
+			<h2>Teacher Menu</h2>
+			<ul>
+				<li><a href="index.html" class="tran3s">Home</a></li>
+				<li>/</li>
+				<li>Teacher</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+
+<div class="our-instructor">
+	<div class="container">
+
+		<div class="row">
+			<div class="clearfix">
+				<div class="col-12">
+					{% if error %}
+					<h4 style="color: red;">{{error}}</h4>
+					{% endif %}
+					{% if msg %}
+					<h4 style="color: green;">{{msg}}</h4>
+					{% endif %}
+				</div>
+				<div class="col-md-3 col-sm-4 col-xs-6">
+					<div class="single-member">
+						<div class="image">
+							<img src="\static\images\team\3.jpg" alt="">
+						</div>
+						<h6><a href="{% url 'teacher:newarticle' %}" class="tran3s">Add Article</a></h6>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-4 col-xs-6">
+					<div class="single-member">
+						<div class="image">
+							<img src="\static\images\team\3.jpg" alt="">
+						</div>
+						<h6><a href="{% url 'teacher:editarticle' %}" class="tran3s">Edit Article</a></h6>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-4 col-xs-6">
+					<div class="single-member">
+						<div class="image">
+							<img src="\static\images\team\3.jpg" alt="">
+						</div>
+						<h6><a href="{% url 'teacher:newcategory' %}" class="tran3s">Add Category</a></h6>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-4 col-xs-6">
+					<div class="single-member">
+						<div class="image">
+							<img src="\static\images\team\3.jpg" alt="">
+						</div>
+						<h6><a href="{% url 'teacher:newsubcategory' %}" class="tran3s">Add SubCategory</a></h6>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock body %}

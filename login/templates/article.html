@@ -1,0 +1,328 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+{% block script %}
+<script>
+	function impreview(i) {
+		var preview = document.getElementById('image');
+		var file = document.getElementById('id_image').files[0];
+		var reader = new FileReader();
+
+		reader.onloadend = function () {
+			preview.src = reader.result;
+		}
+
+		if (file) {
+			reader.readAsDataURL(file);
+		} else {
+			preview.src = i;
+		}
+	}
+</script>
+{% endblock script %}
+{% block body %}
+
+
+<div class="inner-banner">
+	<div class="opacity">
+		<div class="container">
+			<h2>Single Blog</h2>
+			<ul>
+				<li><a href="index.html" class="tran3s">Home</a></li>
+				<li>/</li>
+				<li>Blog</li>
+			</ul>
+		</div> <!-- /.container -->
+	</div> <!-- /.opacity -->
+</div> <!-- /.inner-banner -->
+
+
+<div class="our-blog blog-innner-page blog-list blog-details">
+	<div class="container">
+		<div class="row">
+			{% if  editarticle%}
+			<div class="col-md-4 col-xs-12">
+				<div class="image"><img id="image" src="{{article.image.url}}" alt=""></div>
+				<button class="btn p-bg-color hvr-trim" onclick="impreview('{{article.image.url}}')">Click To
+					Preview Image</button>
+			</div>
+			<div class="col-md-8 col-xs-12">
+				<div class="single-blog">
+					<div class="signUpModal theme-modal-box">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-body" style="padding: 0;">
+									<form action="" method="POST" enctype="multipart/form-data">
+										{% csrf_token %}
+										<h3>Article</h3>
+										<div class="wrapper">
+											<div class="form-group">
+												{{form}}
+											</div>
+											<input type="text" id='title' value="{{ article.title }}" name='title' placeholder="Title" required>
+											<input type="text" id='youtube' value="{{ article.youtube }}" name='youtube' placeholder="Youtube ID">
+											<textarea name="body" id="body" class="form-control" rows="10"
+												required>{{article.body}}</textarea>
+											<br>
+											<button class="p-bg-color hvr-trim" id="save">Save</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			{% elif addarticle %}
+			<div class="col-md-4 col-xs-12">
+				<div class="image"><img id="image" src="\static\images\blog\11.jpg" alt=""></div>
+				<button class="btn p-bg-color hvr-trim" onclick="impreview('\\static\\images\\blog\\11.jpg')">Click To
+					Preview Image</button>
+			</div>
+			<div class="col-md-8 col-xs-12">
+				<div class="single-blog">
+					<div class="signUpModal theme-modal-box">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-body" style="padding: 0;">
+									<form action="" method="POST" enctype="multipart/form-data">
+										{% csrf_token %}
+										<h3>Article</h3>
+										<div class="wrapper">
+											<div class="form-group">
+												{{form}}
+											</div>
+											<input type="text" id='title' name='title' placeholder="Title" required>
+											<input type="text" id='youtube' name='youtube' placeholder="Youtube ID">
+											<textarea name="body" id="body" class="form-control" rows="10"
+												required>Body</textarea>
+											<br>
+											<button class="p-bg-color hvr-trim" id="save">Save</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			{% else %}
+			<div class="col-md-8 col-xs-12">
+
+				<div class="single-blog">
+					<div class="image"><img src="images\blog\11.jpg" alt=""></div>
+					<ul>
+						<li>
+							<i class="flaticon-comments"></i>
+							<a href="#" class="tran3s">13</a>
+						</li>
+						<li>
+							<i class="flaticon-heart"></i>
+							<a href="#" class="tran3s">3</a>
+						</li>
+					</ul>
+					<h4>How Become a Great Java Developer</h4>
+					<p>At about the same time, Rahul Roy Chowdhury took charge of Google team that oversees.Chrome,
+						the
+						company’s web browser. remember the ‘Web is Dead’ article very clearly, he remembers. “I
+						thought: ‘Oh My God. I’ve made a mistake.'” Needless to say, he didn’t really believe
+						that.The
+						like button was first announced as a FriendFeed feature on October 30, 2007 and was
+						popularized
+						within its community.</p> <br>
+					<p>Later on the feature was integrated to Facebook before eventually FriendFeed was acquired by
+						Facebook August 10, 2009.The Facebook like button is designed as a hand giving "thumbs up".
+						It
+						was originally discussed to have been a star or a plus sign, and during development the
+						feature
+						was referred to as "awesome" instead of "like". It was introduced on 9 February 2009.</p>
+					<div class="mark-text">
+						<div class="row">
+							<div class="col-sm-3 col-xs-12">
+								<h6>iMPORTANT <br>note</h6>
+								<i>This is a quantitative alternative to other methods of expressing reaction to
+									content, button</i>
+							</div> <!-- /.col- -->
+							<div class="col-sm-9 col-xs-12">
+								<h5>A like button, like option, or recommend button is a feature in communication
+									software such as social networking services, Internet forums, news websites and
+									blogs where the user can express that they like, enjoy or support certain
+									content.
+								</h5>
+							</div>
+						</div> <!-- /.row -->
+					</div> <!-- /.mark-text -->
+
+					<div class="author-text">
+						<div class="row">
+							<div class="col-sm-3 col-xs-12 name">
+								<img src="images\blog\15.jpg" alt="images">
+								<h6>Slava Kuteev</h6>
+								<p>UI/UX Deginer</p>
+							</div>
+							<div class="col-sm-9 col-xs-12">
+								<p>The like button was first announced as a FriendFeed feature on October 30, 2007
+									and
+									was popularized within its community. Later on the feature was integrated to
+									Facebook before eventually FriendFeed was acquired by Facebook August 10, 2009.
+									At
+									about th sametime, Rahul Roy Chowdhury took charge of Google team that
+									oversees.Chrome, the company’s web browser. didn’t really believe that.</p>
+							</div>
+						</div> <!-- /.row -->
+					</div> <!-- /.author-text -->
+				</div> <!-- /.single-blog -->
+				<div class="comment-area">
+					<div class="comment-title clearfix">
+						<h4 class="float-left">Comments <span class="s-bg-color">4</span></h4>
+						<ul class="float-right">
+							<li><a href="#" class="tran3s"><i class="fa fa-facebook" aria-hidden="true"></i>
+									Like</a>
+							</li>
+							<li><a href="#" class="tran3s"><i class="fa fa-twitter" aria-hidden="true"></i>
+									Tweet</a>
+							</li>
+							<li><a href="#" class="tran3s"><i class="fa fa-google-plus" aria-hidden="true"></i>
+									Share</a></li>
+						</ul>
+					</div> <!-- /.comment-title -->
+					<div class="single-commnet clearfix">
+						<img src="images\blog\16.jpg" alt="" class="float-left">
+						<div class="comment float-left border">
+							<div class="clearfix">
+								<h6 class="float-left">Alex Martin</h6>
+								<span class="float-right">3 day ago</span>
+							</div>
+							<p>Man's technological ascent began in earnest in what is known as the Neolithic period
+								("New stone age"). The invention of polished stone axes was a major advance that
+								allowed
+								forest clearance on a large scale . Agriculture fed larger populations, and the
+								transition to sedentism.allowed simultaneously raising more children, as infants no
+								longer needed to be carried, </p>
+							<ul>
+								<li><a href="#"><i class="flaticon-heart"></i> 32</a> </li>
+								<li><a href="#"><i class="fa fa-share" aria-hidden="true"></i> Reply</a></li>
+							</ul>
+
+							<div class="single-commnet clearfix reply-comment">
+								<img src="images\blog\17.jpg" alt="" class="float-left">
+								<div class="comment float-left">
+									<div class="clearfix">
+										<h6 class="float-left">Jannatul Ferdaous</h6>
+										<span class="float-right">1 day ago</span>
+									</div>
+									<p>Man's technological ascent began in earnest in what is known as the Neolithic
+										period The invention of polished stone axes was a major advance that allowed
+										forest clearance on a large scale . Agriculture fed larger populations,</p>
+									<ul>
+										<li><a href="#"><i class="flaticon-heart"></i> 13</a> </li>
+										<li><a href="#"><i class="fa fa-share" aria-hidden="true"></i> Reply</a>
+										</li>
+									</ul>
+								</div> <!-- /.comment -->
+							</div> <!-- /.single-commnet -->
+						</div> <!-- /.comment -->
+					</div> <!-- /.single-commnet -->
+					<div class="single-commnet clearfix">
+						<img src="images\blog\18.jpg" alt="" class="float-left">
+						<div class="comment float-left border">
+							<div class="clearfix">
+								<h6 class="float-left">Josef Doe</h6>
+								<span class="float-right">5 day ago</span>
+							</div>
+							<p>Optimistic assumptions are made by proponents of ideologies such as transhumanism and
+								singularitarianism, which view technological development as generally having
+								beneficial
+								effects for the society and the human condition. In these ideologies, technological
+								development is morally good. Some critics see these ideologies as examples of
+								scientism
+								and techno-utopianism and fear the notion.</p>
+							<ul>
+								<li><a href="#"><i class="flaticon-heart"></i> 12</a> </li>
+								<li><a href="#"><i class="fa fa-share" aria-hidden="true"></i> Reply</a></li>
+							</ul>
+						</div> <!-- /.comment -->
+					</div> <!-- /.single-commnet -->
+				</div> <!-- /.comment-area -->
+
+				<div class="reply-comment-form">
+					<h4>Reply A Comment</h4>
+					<form action="#">
+						<div class="row">
+							<div class="col-sm-6">
+								<input type="text" placeholder="Your Name">
+								<input type="email" placeholder="Your Email">
+								<input type="text" placeholder="Phone Number">
+							</div>
+							<div class="col-sm-6">
+								<textarea placeholder="Your Comment"></textarea>
+							</div>
+						</div>
+						<div class="clearfix"><input type="submit" value="Submit" class="float-right s-bg-color">
+						</div>
+					</form>
+				</div> <!-- /.reply-comment-form -->
+
+			</div> <!-- /.col- -->
+
+
+			<div class="col-md-4 col-sm-6 col-xs-12 theme-sidebar">
+				<form action="#" class="sidebar-search">
+					<input type="text" placeholder="Search">
+					<button class="tran3s"><i class="flaticon-search"></i></button>
+				</form>
+				<div class="sidebar-categories">
+					<h4>Categories</h4>
+					<ul>
+						<li><a href="" class="tran3s">Web Develoment</a></li>
+						<li><a href="" class="tran3s">Graphic Design</a></li>
+						<li><a href="" class="tran3s">Web Design</a></li>
+						<li><a href="" class="tran3s">IOS/Android Development</a></li>
+						<li><a href="" class="tran3s">Others</a></li>
+					</ul>
+				</div> <!-- /.sidebar-categories -->
+				<div class="sidebar-recent-news">
+					<h4>Recent News</h4>
+					<ul>
+						<li class="single-news clearfix">
+							<img src="images\blog\4.jpg" alt="" class="float-left">
+							<div class="post float-left">
+								<h6><a href="#" class="tran3s">How to Become Master In Java scrpt...</a></h6>
+								<p><i class="fa fa-clock-o" aria-hidden="true"></i> 10 Apr, 2016</p>
+							</div> <!-- /.post -->
+						</li>
+						<li class="single-news clearfix">
+							<img src="images\blog\5.jpg" alt="" class="float-left">
+							<div class="post float-left">
+								<h6><a href="#" class="tran3s">How to Become Master In Java scrpt...</a></h6>
+								<p><i class="fa fa-clock-o" aria-hidden="true"></i> 10 Apr, 2016</p>
+							</div> <!-- /.post -->
+						</li>
+						<li class="single-news clearfix">
+							<img src="images\blog\6.jpg" alt="" class="float-left">
+							<div class="post float-left">
+								<h6><a href="#" class="tran3s">How to Become Master In Java scrpt...</a></h6>
+								<p><i class="fa fa-clock-o" aria-hidden="true"></i> 10 Apr, 2016</p>
+							</div> <!-- /.post -->
+						</li>
+					</ul>
+				</div> <!-- /.sidebar-recent-news -->
+				<div class="sidebar-keyword">
+					<h4>Keyword</h4>
+					<ul class="clearfix">
+						<li><a href="" class="tran3s">Ideas</a></li>
+						<li><a href="" class="tran3s">Funrising</a></li>
+						<li><a href="" class="tran3s">Charity</a></li>
+						<li><a href="" class="tran3s">Children</a></li>
+						<li><a href="" class="tran3s">Food</a></li>
+					</ul>
+				</div> <!-- /.sidebar-keyword -->
+			</div>
+			{% endif %}
+		</div> <!-- /.row -->
+	</div> <!-- /.container -->
+</div> <!-- /.our-blog -->
+
+
+
+{% endblock body %}

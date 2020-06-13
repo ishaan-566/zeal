@@ -1,0 +1,49 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+<div class="inner-banner">
+	<div class="opacity">
+		<div class="container">
+			<h2>Our Shop</h2>
+			<ul>
+				<li><a href="index.html" class="tran3s">Home</a></li>
+				<li>/</li>
+				<li>Category</li>
+			</ul>
+		</div> <!-- /.container -->
+	</div> <!-- /.opacity -->
+</div> <!-- /.inner-banner -->
+
+<div class="shop-page">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 all-product-wrapper">
+				<div class="row">
+					{% for c in categories2 %}
+						
+					<div class="col-sm-4 col-xs-6">
+						<div class="single-item">
+							<img src="{{ c.image.url }}" alt="">
+							<h5><a href="" class="tran3s">{{ c.name }}</a></h5>
+							<a href="category-{{ c.id }}" class="tran3s cart">Click To View</a>
+						</div> <!-- /.single-item -->
+					</div> <!-- /.col- -->
+					{% endfor %}
+					
+				</div> <!-- /.row -->
+				<ul class="theme-pagination clearfix">
+					{% for p,c in pages.items %}
+						<li><a {{c}}>{{p}}</a></li>
+					{% endfor %}
+					<li></li>
+				</ul>
+			</div> 
+		</div>
+	</div>
+</div>
+
+
+
+{% endblock body %}

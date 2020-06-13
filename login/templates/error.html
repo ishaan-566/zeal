@@ -1,0 +1,25 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<div class="inner-banner">
+	<div class="opacity">
+		<div class="container">
+			<h2>{{ head_error }}</h2>
+			<ul>
+				<li><a href="/" class="tran3s">Home</a></li>
+				<li>/</li>
+				<li>error</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="container error-page">
+	<h2>{{ gen_error }}</h2>
+	<h3>Looks like somthing went wrong</h3>
+	<p>{{ desc }}</p>
+	<div>
+		<a href="/" class="tran3s s-bg-color hvr-trim">Go Home</a>
+	</div>
+</div> 
+{% endblock body %}

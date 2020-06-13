@@ -1,0 +1,127 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+
+{% block script %}
+<script>
+	function changeContext(a) {
+		var bt1 = document.getElementById(a)
+		var bt2;
+		if (a == 'list') {
+			bt2 = document.getElementById('grid');
+			document.getElementById('listdisp').style.display = 'block';
+			document.getElementById('griddisp').style.display = 'none';
+			
+		}
+		else {
+			bt2 = document.getElementById('list');
+			document.getElementById('listdisp').style.display = 'none';
+			document.getElementById('griddisp').style.display = 'block';
+		}
+		bt1.disabled = true;
+		bt2.disabled = false;
+	}
+</script>
+{% endblock script %}
+
+{% block body %}
+
+
+<div class="inner-banner">
+	<div class="opacity">
+		<div class="container">
+			<h2>Articles</h2>
+			<ul>
+				<li><a href="/" class="tran3s">Home</a></li>
+				<li>/</li>
+				<li><a href="/category" class="tran3s">Categories</a></li>
+				<li>/</li>
+				<li>Subcatrgory-Articles</li>
+			</ul>
+		</div> <!-- /.container -->
+	</div> <!-- /.opacity -->
+</div> <!-- /.inner-banner -->
+
+
+<div class="our-blog blog-innner-page blog-list">
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-8 col-xs-12" id='griddisp' style="display: none;">
+				<div class="row">
+					{% for a in articles %}		
+					<div class="col-sm-6">
+						<div class="single-blog">
+							<div class="image"><img src="{{a.image.url}}" alt=""></div>
+							<ul>
+								<li>
+									<i class="flaticon-comments"></i>
+									<a href="#" class="tran3s">13</a>
+								</li>
+							</ul>
+							<h4><a href="/article/display-article{{ a.id }}" class="tran3s">{{ a.title|title }}</a></h4>
+							<p>{{ a.body|slice:":90" }}...</p>
+							<a href="/article/display-article{{ a.id }}" class="tran3s">Read More</a>
+						</div>
+					</div> 
+					{% endfor %}
+				</div>
+				<ul class="theme-pagination clearfix">
+					{% for p,c in pages.items %}
+					<li><a {{ c }}>{{p}}</a></li>	
+					{% endfor %}
+					<li></li>
+				</ul> <!-- /.theme-pagination -->
+			</div>
+
+
+
+
+
+
+
+
+			<div class="col-md-8 col-xs-12" id="listdisp">
+				{% for a in articles %}
+				
+				<div class="single-blog">
+					<div class="image"><img src="{{ a.image.url }}" alt=""></div>
+					<ul>
+						<li>
+							<i class="flaticon-comments"></i>
+							<a href="#" class="tran3s">13</a>
+						</li>
+					</ul>
+					<h4><a href="/article/display-article{{ a.id }}" class="tran3s">{{ a.title|title }}</a></h4>
+					<p>{{ a.body|slice:":90" }}...</p>
+					<a href="/article/display-article{{ a.id }}" class="tran3s">Read More</a>
+				</div> <!-- /.single-blog -->
+					
+				{% endfor %}
+
+				<ul class="theme-pagination clearfix">
+					{% for p,c in pages.items %}
+					<li><a {{ c }}>{{p}}</a></li>	
+					{% endfor %}
+					<li></li>
+				</ul>
+			</div>
+			<div class="col-md-4 col-sm-6 col-xs-12 theme-sidebar">
+								<button class="btn btn-info btn-lg" id='list' onclick="changeContext('list')" disabled><span class="glyphicon glyphicon-th-list"></span></button>
+				<button class="btn btn-info btn-lg" id='grid' onclick="changeContext('grid')"><span class="glyphicon glyphicon-th"></span></button>
+				
+				<div class="sidebar-categories">
+					<h4>Categories</h4>
+					<ul>
+						{% for c in categories %}
+						<li><a href="/category-{{ c.id }}" class="tran3s">{{c.name}}</a></li>
+						{% endfor %}
+					</ul>
+				</div> <!-- /.sidebar-categories -->
+				
+			</div> <!-- /.theme-sidebar -->
+		</div> <!-- /.row -->
+	</div> <!-- /.container -->
+</div> <!-- /.our-blog -->
+
+
+{% endblock body %}
